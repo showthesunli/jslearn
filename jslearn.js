@@ -145,6 +145,7 @@ console.log( getAverageAge(arr) ); // (25 + 30 + 29) / 3 = 28
     创建一个函数 unique(arr)，返回去除重复元素后的数组 arr。
 
 function unique(arr) {
+    //实现有误，元素组被修改后，继续迭代会导致索引混乱，寻址出错
     arr.map((currItem, idx, currArr) => {
         if(currArr.includes(currItem, idx+1)){
             currArr.splice(idx,1);
@@ -158,7 +159,7 @@ let strings = ["Hare", "Krishna", "Hare", "Krishna",
 
 unique(strings)
 console.log(strings); // Hare, Krishna, :-O
- */
+
 let users = [
     { id: 'john', name: "John Smith", age: 20 },
     { id: 'ann', name: "Ann Smith", age: 24 },
@@ -174,3 +175,4 @@ function groupById(arr) {
 }
 let usersById = groupById(users);
 console.log(usersById)
+ */
