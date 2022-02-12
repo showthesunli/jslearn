@@ -31,10 +31,7 @@ console.log(camelize("-webkit-transition"))
 该函数不应该修改原数组。它应该返回新的数组。
  */
 function filterRange(arr, a, b){
-    let resArr = arr.filter((curVal, curIdx, curArr) =>{
-        return curVal >= a && curVal <=b ? true : false;
-    })
-    return resArr;
+    return arr.filter(curVal => curVal >= a && curVal <= b ? true : false);
 }
 
 let arr = [5, 3, 8, 1];
