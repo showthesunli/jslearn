@@ -66,3 +66,7 @@ let keys = Array.from(map.keys());
 
 keys.push("more");
 console.log(keys)
+
+for(let item of map){
+  console.log(Array.isArray(item))
+}
