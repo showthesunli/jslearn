@@ -126,5 +126,6 @@ function printReverseList(list){
         printReverseList(list.next);
     }
     console.log(list.value)
+   
 }
 printReverseList(list)
