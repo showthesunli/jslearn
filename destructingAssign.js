@@ -44,3 +44,12 @@ function topSalary(salaries){
 }
 
 console.log(topSalary(salaries))
+
+salaries = [100, 300, 250];
+function allSalary([John, Pete, Mary]){
+  console.log(John)
+  console.log(Pete)
+  console.log(Mary)
+}
+
+allSalary(salaries);
