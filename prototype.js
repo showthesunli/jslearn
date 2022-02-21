@@ -24,8 +24,8 @@
 }
 {
     let hamster = {
-        get stomach(){
-            if (this._stomach === undefined){
+        get stomach() {
+            if (this._stomach === undefined) {
                 this._stomach = [];
             }
             return this._stomach;
@@ -47,7 +47,16 @@
     speedy.eat("apple");
     console.log(speedy.stomach); // apple
 
-    console.log(`stomach is _stomach and type is ${Array.isArray(speedy.stomach)? 'array': 'not array'}`)
+    console.log(`stomach is _stomach and type is ${Array.isArray(speedy.stomach) ? 'array' : 'not array'}`)
     // 这只仓鼠也找到了食物，为什么？请修复它。
     console.log(lazy.stomach); // apple
+}
+
+{
+    function Rabbit() { }
+    // by default:
+    // Rabbit.prototype = { constructor: Rabbit }
+    console.log(Rabbit.prototype)
+
+    console.log(Rabbit.prototype.constructor == Rabbit); // true
 }
