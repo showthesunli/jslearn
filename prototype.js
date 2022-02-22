@@ -199,4 +199,14 @@
     }
 
     f.defer(1000)(1, 2); // 1 秒后显示 3
+
+    let user = {
+        name:'lee',
+        sayHi(){
+            console.log(`${this.name}, sayHi`)
+        }
+    }
+
+    user.sayHi = user.sayHi.defer(1000);
+    user.sayHi();
 }
