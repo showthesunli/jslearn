@@ -201,12 +201,89 @@
     f.defer(1000)(1, 2); // 1 秒后显示 3
 
     let user = {
-        name:'lee',
-        sayHi(){
+        name: 'lee',
+        sayHi() {
             console.log(`${this.name}, sayHi`)
         }
     }
 
     user.sayHi = user.sayHi.defer(1000);
     user.sayHi();
+}
+
+{
+    let rabbit = {
+        name: 'lee'
+    }
+    console.log(rabbit.name)
+    rabbit = Object.create(null, { name: { value: 'lee' } })
+    console.log(rabbit.name)
+}
+
+{
+    /**
+     * 这儿有一个通过 Object.create(null) 创建的，用来存储任意 key/value 对的对象 dictionary。
+
+     * 为该对象添加 dictionary.toString() 方法，该方法应该返回以逗号分隔的所有键的列表。你的 toString 方法不应该在使用 for...in 循环遍历数组的时候显现出来。
+
+     * 它的工作方式如下：
+     */
+    let dictionary = Object.create(null);
+
+    // 你的添加 dictionary.toString 方法的代码
+    Object.defineProperty(dictionary, 'toString', {
+        value: function () {
+            return Object.keys(this).join();
+        },
+        writable: true,
+        enumerable: false,
+        configurable: false
+    })
+
+    // 添加一些数据
+    dictionary.apple = "Apple";
+    dictionary.__proto__ = "test"; // 这里 __proto__ 是一个常规的属性键
+
+    // 在循环中只有 apple 和 __proto__
+    for (let key in dictionary) {
+        console.log(key); // "apple", then "__proto__"
+    }
+
+    // 你的 toString 方法在发挥作用
+    console.log(`dictionary default toString is ${dictionary}`); // "apple,__proto__"
+}
+
+{
+    /**
+     * 让我们创建一个新的 rabbit 对象：
+
+        function Rabbit(name) {
+        this.name = name;
+        }
+        Rabbit.prototype.sayHi = function() {
+        alert(this.name);
+        };
+
+        let rabbit = new Rabbit("Rabbit");
+        以下调用做的是相同的事儿还是不同的？
+
+        rabbit.sayHi();
+        Rabbit.prototype.sayHi();
+        Object.getPrototypeOf(rabbit).sayHi();
+        rabbit.__proto__.sayHi();
+     */
+    function Rabbit(name) {
+        console.log(this);
+        this.name = name;
+    }
+    Rabbit.prototype.sayHi = function () {
+        console.log(this.name);
+    };
+
+    let rabbit = new Rabbit("Rabbit");
+
+    rabbit.sayHi();
+    Rabbit.prototype.sayHi();
+    Object.getPrototypeOf(rabbit).sayHi();
+    rabbit.__proto__.sayHi();
 }
