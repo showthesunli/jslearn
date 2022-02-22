@@ -130,7 +130,7 @@
 
     delete Rabbit.prototype.eats; //修改了 rabbit继承的原对象
 
-    alert(rabbit.eats); // undefined
+    console.log(rabbit.eats); // undefined
 }
 
 {
@@ -142,4 +142,61 @@
     let obj2 = new obj.constructor();
     请给出一个可以使这样的代码正常工作的 obj 的构造函数的例子。再给出会导致这样的代码无法正确工作的例子。
      */
+    let arbbit = { name: 'yang' }
+    console.log(arbbit.name)
+}
+
+{
+    let rabbit = {}
+    rabbit.__proto__ = null;
+
+    let rabbit1 = {
+        name: 'lee',
+        __proto__: rabbit
+    }
+
+
+}
+
+{
+    /**
+     * 在所有函数的原型中添加 defer(ms) 方法，该方法将在 ms 毫秒后运行该函数。
+     *   当你完成添加后，下面的代码应该是可执行的：
+     * 
+     */
+    Function.prototype.defer = function (ms) {
+        setTimeout(this, ms);
+    }
+
+    function f() {
+        alert("Hello!");
+    }
+
+    // f.defer(5000); // 5 秒后显示 "Hello!"
+}
+
+{
+    /**
+     * 在所有函数的原型中添加 defer(ms) 方法，该方法返回一个包装器，将函数调用延迟 ms 毫秒。
+
+        下面是它应该如何执行的例子：
+
+        function f(a, b) {
+        alert( a + b );
+        }
+
+        f.defer(1000)(1, 2); // 1 秒后显示 3
+        请注意，参数应该被传给原始函数。
+     */
+    Function.prototype.defer = function (ms) {
+        let f = this;
+        return function () {
+            setTimeout(() => f.apply(this, arguments), ms)
+        }
+    }
+    function f(a, b) {
+        console.log(a + b);
+    }
+
+    f.defer(1000)(1, 2); // 1 秒后显示 3
 }
