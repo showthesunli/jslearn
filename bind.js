@@ -58,7 +58,6 @@ user 对象被修改了。现在不是两个函数 loginOk/loginFail，现在只
 
     let user = {
         name: 'John',
-
         login(result) {
             alert(this.name + (result ? ' logged in' : ' failed to log in'));
         }
@@ -67,13 +66,13 @@ user 对象被修改了。现在不是两个函数 loginOk/loginFail，现在只
     // let ok = user.login.bind(user, true);
     // let fail = user.login.bind(user, false);
 
-    function partial(f, ...args){
-        return function(...argus){
+    function partial(f, ...args) {
+        return function (...argus) {
             return f.call(this, ...args, ...argus);
         }
     }
 
-    
+
 
     // askPassword(ok, fail); // ?
     // askPassword(()=> user.login(true), ()=>user.log(false));
