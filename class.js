@@ -133,3 +133,15 @@
 
     alert(rabbit.hasOwnProperty('name')); // Error
 }
+{
+    class User{
+        #name = 'lee'
+
+        sayMyName(){
+            console.log(`hi! my name is ${this.#name}`);
+        }
+    }
+
+    let user = new User();
+    user.sayMyName()
+}
