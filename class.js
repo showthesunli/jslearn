@@ -83,11 +83,41 @@
 
         start = () => {
             this.render();
-            this.timertimer = setInterval(()=>{this.render()}, 1000);
+            this.timertimer = setInterval(() => { this.render() }, 1000);
         };
 
     }
 
     let clock = new Clock({ template: 'h:m:s' });
+    let descriptorOfstart = Object.getOwnPropertyDescriptor(clock, 'start');
+    console.log(descriptorOfstart)
     // clock.start();
+
+    class ExtendClock extends Clock {
+        /*
+        constructor({template, precision=1000}){
+            super(...arguments);
+            this.precision = precision;
+        }
+        */
+        constructor(option) {
+            super(option);
+            //对象解构赋值，取出option中pricision的值，并且其默认为1000
+            let {precision = 1000} = option;  
+            this.precision = precision;
+        }
+
+        start() {
+            this.render();
+            this.timertimer = setInterval(() => this.render(), this.precision)
+        }
+    }
+
+    let ec = new ExtendClock({
+        template: 'h:m:s',
+        precision: 1000
+    })
+
+    ec.start()
 }
+
