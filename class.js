@@ -117,7 +117,7 @@
         template: 'h:m:s',
         precision: 1000
     })
-    console.log("ec's constructor is"+(ec.constructor === ExtendClock))
+    console.log("ec's constructor is" + (ec.constructor === ExtendClock))
     // ec.start()
 }
 
@@ -134,10 +134,10 @@
     // alert(rabbit.hasOwnProperty('name')); // Error
 }
 {
-    class User{
+    class User {
         #name = 'lee'
 
-        sayMyName(){
+        sayMyName() {
             console.log(`hi! my name is ${this.#name}`);
         }
     }
@@ -145,10 +145,73 @@
     let user = new User();
     user.sayMyName()
 
-    function sayMyName(){
+    function sayMyName() {
 
     }
 
     console.log(sayMyName.name)
 
+}
+
+{
+    class Animal {
+        [Symbol.toStringTag] = 'Animal'
+    }
+
+    let rabbit = new Animal();
+    console.log(rabbit[Symbol.toStringTag]);
+    console.log({}.toString.call(rabbit));
+    console.log(rabbit)
+
+    let arr = [];
+    console.log(`arr\'s type is ${{}.toString.call(arr)}`)
+
+    // let user = {
+    //     [Symbol.tostringtag]:
+    // }
+    console.log(`1 \'s type is ${{}.toString.call(1.1)}`)
+    console.log(typeof 1)
+}
+
+{
+    function A() { }
+    function B() { }
+
+    A.prototype = B.prototype = {};
+
+    let a = new A();
+
+    // console.log(a instanceof B); // true
+
+    let b = new B();
+    // console.log(b instanceof A);
+}
+
+{
+    function Animal() { }
+    function Rabbit() { }
+
+    Animal.prototype.run = function () {
+        console.log(`run`)
+    }
+
+    Rabbit.prototype = Animal.prototype;
+
+    let animal = new Animal();
+    let rabbit = new Rabbit();
+
+    console.log(animal instanceof Rabbit);
+}
+{
+    class User {
+        fullName = 'lee yang'
+
+        sayMyName(){
+            console.log(this.fullName);
+        }
+    }
+
+    let user = new User();
+    console.log(user.__proto__)
+    console.log(User.fullName)
 }
