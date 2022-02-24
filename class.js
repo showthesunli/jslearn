@@ -5,10 +5,10 @@
 
     console.log(typeof User); // function
     // User(); // Error: Class constructor User cannot be invoked without 'new'
-    console.log(User)
+    // console.log(User)
 
     let user = new User();
-    console.log(user.__proto__)
+    // console.log(user.__proto__)
 }
 /*
 {
@@ -103,7 +103,7 @@
         constructor(option) {
             super(option);
             //对象解构赋值，取出option中pricision的值，并且其默认为1000
-            let {precision = 1000} = option;  
+            let { precision = 1000 } = option;
             this.precision = precision;
         }
 
@@ -117,7 +117,38 @@
         template: 'h:m:s',
         precision: 1000
     })
-
-    ec.start()
+    console.log("ec's constructor is"+(ec.constructor === ExtendClock))
+    // ec.start()
 }
 
+{
+    class Rabbit extends Object {
+        constructor(name) {
+            super();
+            this.name = name;
+        }
+    }
+
+    let rabbit = new Rabbit("Rab");
+
+    // alert(rabbit.hasOwnProperty('name')); // Error
+}
+{
+    class User{
+        #name = 'lee'
+
+        sayMyName(){
+            console.log(`hi! my name is ${this.#name}`);
+        }
+    }
+
+    let user = new User();
+    user.sayMyName()
+
+    function sayMyName(){
+
+    }
+
+    console.log(sayMyName.name)
+
+}
