@@ -117,7 +117,7 @@
         template: 'h:m:s',
         precision: 1000
     })
-
+    console.log("ec's constructor is"+(ec.constructor === ExtendClock))
     // ec.start()
 }
 
@@ -131,7 +131,7 @@
 
     let rabbit = new Rabbit("Rab");
 
-    alert(rabbit.hasOwnProperty('name')); // Error
+    // alert(rabbit.hasOwnProperty('name')); // Error
 }
 {
     class User{
@@ -144,4 +144,11 @@
 
     let user = new User();
     user.sayMyName()
+
+    function sayMyName(){
+
+    }
+
+    console.log(sayMyName.name)
+
 }
