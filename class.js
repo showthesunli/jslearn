@@ -215,3 +215,14 @@
     console.log(user.__proto__)
     console.log(User.fullName)
 }
+
+{
+    class Animal{}
+
+    class Rabbit extends Animal{}
+
+    let animal = new Animal();
+    let rabbit = new Rabbit();
+
+    console.log(`is animal instanceof Rabbit? ${animal instanceof Rabbit}`)
+}
