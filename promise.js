@@ -1,3 +1,4 @@
+'ues strict'
 {
     /**
      * 内建函数 setTimeout 使用了回调函数。请创建一个基于 promise 的替代方案。
@@ -121,8 +122,88 @@ loadJson('no-such-user.json')
         // ……这里你应该怎么写？
         // 我们需要调用 async wait() 并等待以拿到结果 10
         // 记住，我们不能使用 "await"
-        wait().then((res)=>console.log(res))
+        wait().then((res) => console.log(res))
     }
 
-    f();
+    // f();
+}
+
+{
+    (
+        async () => {
+            let queue = [1, 2, 3];
+            let resovleFn;
+            async function put(message) {
+                if (queue.length >= 3) {
+
+                    await new Promise((resolve, reject) => {
+                        console.log('数组长度大于3')
+                        resovleFn = resolve
+                    })
+                    console.log('继续执行')
+                }
+                queue.push(message)
+            }
+
+            await put(4);
+            console.log('完成，调用回调')
+            resovleFn();
+        }
+    )()
+}
+
+{
+    (
+        async () => {
+            let reso;
+            new Promise((resolve, reject) => (reso = resolve)).then(() =>
+                console.log("success")
+            );
+
+            reso();
+        }
+    )()
+
+}
+
+{
+    (async () => {
+        let queue = [];
+        let resolveOfPuts = [];
+        let resolveOfGets = [];
+
+        function setPromiseDone(arrOfPromise){
+            if (arrOfPromise.length != 0){
+                arrOfPromise.shift()()
+            }
+        }
+
+        async function put(message) {
+            while (queue.length >= 3) {
+                await new Promise(resolve => resolveOfPuts.push(resolve))
+            }
+            queue.push(message)
+            setPromiseDone(resolveOfGets)
+        }
+
+        async function get() {
+            while (queue.length == 0) {
+                await new Promise(resolve => resolveOfGets.push(resolve))
+            }
+            let res = queue.shift();
+            setPromiseDone(resolveOfPuts)
+            return res
+        }
+
+        put(1)
+        put(2)
+        put(3)
+        put(4)
+        debugger
+        get().then(alert)
+        console.log(queue)
+        debugger
+
+    })()
+
 }
